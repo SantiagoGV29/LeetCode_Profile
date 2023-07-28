@@ -2,12 +2,12 @@
 On this repository you will find a readme file where you can find a link to my leet code profile and a brief description of what I have done there
 link: https://leetcode.com/santimafe1013/
 
-#Brief
+# Brief
 There you will find the solution already submitted of the easy solution with the optimized form and the solution of the medium exercise.
 ## Easy
 On the easy exercise i used a notation in a set to store every number of the preffix and every number of the suffix then i will substract the lenght of boughts sets in order to get the value of that index position.
 
-##Medium
+## Medium
 On this exercise i made a recursion solution using an 2d array to represent which letters i have already seen and marked them, then i use some similar algorithm as an DFS on the matrix. 
 1. I made a for loop to look on every place of the matrix
 2. On every place i call the recursive function so it willl look for the word starting from that place
