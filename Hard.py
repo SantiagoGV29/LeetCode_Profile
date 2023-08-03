@@ -29,7 +29,7 @@ class Solution(object):
                     memo.add(S)
                     memo.add(child)
                     return 1 + self.dist(child, T, tree,memo)
-        return 0
+        return 1
 # Not optimized, but works
 from collections import deque
 
@@ -65,8 +65,8 @@ class Solution(object):
         return distances
 
 # Optimized
-class Solution:
-    def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
+class Solution(object):
+    def sumOfDistancesInTree(self, n, edges):
         tree = {}
         for e in range (n):
             tree[e] = []
@@ -93,4 +93,4 @@ class Solution:
                     Next = NumNodes + (n-nodes[node]) - nodes[node]
                     TraverseDfs(node,source,Next)
         TraverseDfs(0,-1,self.First)
-        return distances 
+        return distances      
