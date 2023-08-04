@@ -1,3 +1,4 @@
+#First try of solution but does not work for all cases
 class Solution(object):
     def sumOfDistancesInTree(self, n, edges):
         distances = [0] * n  
@@ -36,28 +37,28 @@ from collections import deque
 class Solution(object):
     def sumOfDistancesInTree(self, n, edges):
         distances = [0] * n  
-        tree = {}
-        for e in range (n):
+        tree = {} # on space complexity we will have O(N*m) where m is the number of edges
+        for e in range (n):# Create tree O (n)
             tree[e] = []
-        for edge in edges:
+        for edge in edges: # Create tree O (n)
             tree[edge[0]].append(edge[1])
             tree[edge[1]].append(edge[0])           
-        for i in range(n):
-            sum = self.dijkstra(tree,i)
-            for s in sum:
-                distances[i] += sum[s]            
+        for i in range(n): # Calculate distance for each node O(n^3)
+            sum = self.dijkstra(tree,i) # O(n^2)
+            for s in sum: # O(n)
+                distances[i] += sum[s] # O(N) on space complexity for the distances array and on the sum array      
         return distances
 
     def dijkstra(self, graph, start):
-        distances = {node: float('inf') for node in graph}
+        distances = {node: float('inf') for node in graph} # Space complexity O(N)
         
-        distances[start] = 0
-        queue = deque([start])
+        distances[start] = 0 
+        queue = deque([start]) # Space complexity O(N(m)) where m is the number of edges
 
-        while queue:
+        while queue: # O(m^2)
             current_node = queue.popleft()
 
-            for neighbor in graph[current_node]:
+            for neighbor in graph[current_node]: # O(k)
                 if distances[neighbor] == float('inf'):
                     distances[neighbor] = distances[current_node] + 1
                     queue.append(neighbor)
@@ -67,17 +68,17 @@ class Solution(object):
 # Optimized
 class Solution(object):
     def sumOfDistancesInTree(self, n, edges):
-        tree = {}
-        for e in range (n):
+        tree = {} # Space complexity O(N*m) where m is the number of edges
+        for e in range (n): # Create tree O (n) where n is the number of nodes
             tree[e] = []
-        for edge in edges:
+        for edge in edges: # Fill tree O (m) where m is the number of edges
             tree[edge[0]].append(edge[1])
             tree[edge[1]].append(edge[0])  
             
-        distances = [0] * n  
-        nodes = [1]*n
-        self.First = 0
-        def Count(source,root,level):
+        distances = [0] * n  # Space complexity O(N)
+        nodes = [1]*n # Space complexity O(N)
+        self.First = 0 
+        def Count(source,root,level): # O(n) where n is the number of nodes 
             NumNode = 1
             for node in tree[source]:
                 if node != root:
@@ -86,7 +87,7 @@ class Solution(object):
             nodes[source] = NumNode
             return NumNode
         Count(0,-1,0)
-        def TraverseDfs(source,root,NumNodes):
+        def TraverseDfs(source,root,NumNodes): # O(n) where n is the number of nodes
             distances[source] = NumNodes
             for node in tree[source]:
                 if node !=  root:
