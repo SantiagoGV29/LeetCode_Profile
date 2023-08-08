@@ -1,4 +1,5 @@
 #First try of solution but does not work for all cases
+from collections import deque
 class Solution(object):
     def sumOfDistancesInTree(self, n, edges):
         distances = [0] * n  
@@ -32,10 +33,8 @@ class Solution(object):
                     return 1 + self.dist(child, T, tree,memo)
         return 1
 # Not optimized, but works
-from collections import deque
-
-class Solution(object):
-    def sumOfDistancesInTree(self, n, edges):
+    
+    def sumOfDistancesInTreeDisjktra(self, n, edges):
         distances = [0] * n  
         tree = {} # on space complexity we will have O(N*m) where m is the number of edges
         for e in range (n):# Create tree O (n)
@@ -66,8 +65,7 @@ class Solution(object):
         return distances
 
 # Optimized
-class Solution(object):
-    def sumOfDistancesInTree(self, n, edges):
+    def sumOfDistancesInTreeOp(self, n, edges):
         tree = {} # Space complexity O(N*m) where m is the number of edges
         for e in range (n): # Create tree O (n) where n is the number of nodes
             tree[e] = []
