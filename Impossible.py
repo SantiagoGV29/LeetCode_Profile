@@ -12,7 +12,6 @@ class Solution(object):
                 value = v            
         return value
 
-
 def Create_Combinations(nums, n):
     def generate_combinations(i, a):
         if len(a) == n // 2:
@@ -29,6 +28,7 @@ def Create_Combinations(nums, n):
     return combinations
 
 #Optimized
+
 
 class Solution:
     def minimumDifference(self, nums):
