@@ -1,37 +1,33 @@
+import bisect
+
 class Solution(object):
-    def minimumDifference(self, nums):        
-        Combinations = Create_Combinations(nums,len(nums))
-        value = float('inf')
-        Total = 0
-        for i in nums:
-            Total += abs(i)
-        print(Total,Combinations)
-        for comb in Combinations:
-            v = abs(sum(comb) - (Total-sum(comb)))
-            if v < value:
-                value = v            
-        return value
+    def minimumDifference(self, nums):
+        Combinations = self.Create_Combinations(nums)
+        better_combinations = {}
+        for combination in Combinations:
+            a,b = combination
+            value = abs(sum(a) - sum(b))
+            if value not in better_combinations:
+                better_combinations[value] = combination
+        return min(better_combinations.keys())
 
-def Create_Combinations(nums, n):
-    def generate_combinations(i, a):
-        if len(a) == n // 2:
-            combinations.append(a[:])
-            return
-        if i == len(nums):
-            return
 
-        generate_combinations(i + 1, a + [nums[i]])
-        generate_combinations(i + 1, a)
+    def Create_Combinations(self,nums):
+        def generate_combinations(i, a, b):
+            if i == len(nums):
+                if len(a) <= len(nums) // 2 and len(b) <= len(nums) // 2:
+                    combinations.append((a[:], b[:]))
+                return
 
-    combinations = []
-    generate_combinations(0, [])
-    return combinations
+            generate_combinations(i + 1, a + [nums[i]], b)
+            generate_combinations(i + 1, a, b + [nums[i]])
+        combinations = []
+        generate_combinations(0, [], [])
+        return combinations
 
 #Optimized
 
-
-class Solution:
-    def minimumDifference(self, nums):
+    def minimumDifferenceOP(self, nums):
         def get_combinations(arr, k):
             def generate_combinations(start, current_comb):
                 if len(current_comb) == k:
